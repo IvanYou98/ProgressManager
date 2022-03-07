@@ -1,5 +1,6 @@
 package edu.ivanyou.backend.controller;
 
+import edu.ivanyou.backend.exception.ProjectIdException;
 import edu.ivanyou.backend.model.Project;
 import edu.ivanyou.backend.services.ProjectService;
 import edu.ivanyou.backend.services.ValidationErrorMapService;
@@ -35,7 +36,12 @@ public class ProjectController {
         if (errorMap != null) {
             return errorMap;
         }
-        Project newProject = projectService.saveOrUpdateProject(project);
-        return new ResponseEntity<>(newProject, HttpStatus.CREATED);
+
+        try {
+            Project newProject = projectService.saveOrUpdateProject(project);
+            return new ResponseEntity<>(newProject, HttpStatus.CREATED);
+        } catch (Exception e) {
+            throw new ProjectIdException(project.getProjectIdentifier() + " already exist!");
+        }
     }
 }
