@@ -42,6 +42,11 @@ public class ProjectController {
         }
     }
 
+    @GetMapping("/all")
+    public ResponseEntity<?> getAllProjects() {
+        return new ResponseEntity<>(projectService.findAllProjects(), HttpStatus.OK);
+    }
+
     @GetMapping("/{projectId}")
     public ResponseEntity<?> getProjectById(@PathVariable String projectId) {
         return new ResponseEntity<>(projectService.findProjectByIdentifier(projectId), HttpStatus.OK);

@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestBody;
 
 import javax.validation.Valid;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -25,5 +26,9 @@ public class ProjectService {
             throw new ProjectIdException("Project id: " + projectIdentifier + " does not exist!");
         }
         return project;
+    }
+
+    public List<Project> findAllProjects() {
+        return projectRepository.findAll();
     }
 }
