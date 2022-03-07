@@ -2,6 +2,7 @@ package edu.ivanyou.backend.controller;
 
 import edu.ivanyou.backend.model.Project;
 import edu.ivanyou.backend.services.ProjectService;
+import edu.ivanyou.backend.services.ValidationErrorMapService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -23,16 +24,16 @@ public class ProjectController {
     @Autowired
     private ProjectService projectService;
 
+    @Autowired
+    private ValidationErrorMapService validationErrorMapService;
+
 
     @PostMapping("")
     public ResponseEntity<?> createNewProject(@Valid @RequestBody Project project,
                                               BindingResult result) {
-        if (result.hasErrors()) {
-            HashMap<String, String> errMessage = new HashMap<>();
-            for (FieldError fieldError : result.getFieldErrors()) {
-                errMessage.put(fieldError.getField(), fieldError.getDefaultMessage());
-            }
-            return new ResponseEntity<>(errMessage, HttpStatus.BAD_REQUEST);
+        ResponseEntity<?> errorMap = validationErrorMapService.mapValidationError(result);
+        if (errorMap != null) {
+            return errorMap;
         }
         Project newProject = projectService.saveOrUpdateProject(project);
         return new ResponseEntity<>(newProject, HttpStatus.CREATED);
