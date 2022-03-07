@@ -1,5 +1,6 @@
 package edu.ivanyou.backend.services;
 
+import edu.ivanyou.backend.exception.ProjectIdException;
 import edu.ivanyou.backend.model.Project;
 import edu.ivanyou.backend.repositories.ProjectRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestBody;
 
 import javax.validation.Valid;
+import java.util.Optional;
 
 @Service
 public class ProjectService {
@@ -15,5 +17,13 @@ public class ProjectService {
 
     public Project saveOrUpdateProject(Project project) {
         return projectRepository.save(project);
+    }
+
+    public Project findProjectByIdentifier(String projectIdentifier) {
+        Project project = projectRepository.findByProjectIdentifier(projectIdentifier);
+        if (project == null) {
+            throw new ProjectIdException("Project id: " + projectIdentifier + " does not exist!");
+        }
+        return project;
     }
 }

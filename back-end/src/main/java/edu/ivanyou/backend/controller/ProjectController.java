@@ -10,9 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.HashMap;
@@ -36,12 +34,16 @@ public class ProjectController {
         if (errorMap != null) {
             return errorMap;
         }
-
         try {
             Project newProject = projectService.saveOrUpdateProject(project);
             return new ResponseEntity<>(newProject, HttpStatus.CREATED);
         } catch (Exception e) {
             throw new ProjectIdException(project.getProjectIdentifier() + " already exist!");
         }
+    }
+
+    @GetMapping("/{projectId}")
+    public ResponseEntity<?> getProjectById(@PathVariable String projectId) {
+        return new ResponseEntity<>(projectService.findProjectByIdentifier(projectId), HttpStatus.OK);
     }
 }
