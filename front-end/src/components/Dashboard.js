@@ -1,13 +1,15 @@
 import React, {Component} from 'react';
-import ProjectItem from "./project/ProjectItem";
-import "bootstrap/dist/css/bootstrap.min.css";
+import NavBar from "./NavBar";
+
+import DashboardItem from "./DashboardItem";
 
 class Dashboard extends Component {
     render() {
         return (
             <div>
-                <h1 className="alert-danger">Welcome to the Dashboard</h1>
-                <ProjectItem/>
+                {/*Navigation Bar*/}
+                <NavBar/>
+                <DashboardItem/>
             </div>
         );
     }

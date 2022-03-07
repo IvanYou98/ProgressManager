@@ -2,12 +2,12 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import reportWebVitals from './reportWebVitals';
-import Dashboard from "./components/Dashboard";
+import App from "./App";
 
 ReactDOM.render(
   <React.StrictMode>
       <div className="App">
-          <Dashboard/>
+          <App/>
       </div>
   </React.StrictMode>,
   document.getElementById('root')
