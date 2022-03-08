@@ -1,5 +1,9 @@
 import React from 'react';
 import Form from "../common/Form";
+import ProTypes from 'prop-types'
+import {connect} from "react-redux";
+import {createProject} from "../../actions/projectActions";
+
 
 class AddProject extends Form {
     render() {
