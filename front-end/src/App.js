@@ -4,16 +4,20 @@ import {BrowserRouter, Route} from "react-router-dom";
 import NavBar from "./components/NavBar";
 import AddProject from "./components/project/AddProject";
 import Dashboard from "./components/Dashboard";
+import {Provider} from "react-redux";
+import store from "./store";
 
 function App() {
     return (
-        <BrowserRouter>
-            <div>
-                <NavBar/>
-                <Route path="/dashBoard" exact component={Dashboard}/>
-                <Route path="/addProject" exact component={AddProject}/>
-            </div>
-        </BrowserRouter>
+        <Provider store={store}>
+            <BrowserRouter>
+                <div>
+                    <NavBar/>
+                    <Route path="/dashBoard" exact component={Dashboard}/>
+                    <Route path="/addProject" exact component={AddProject}/>
+                </div>
+            </BrowserRouter>
+        </Provider>
     );
 }
 
