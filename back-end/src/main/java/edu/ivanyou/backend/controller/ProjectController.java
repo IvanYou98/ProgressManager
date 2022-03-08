@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 
 @Controller
+@CrossOrigin
 @RequestMapping("api/project")
 public class ProjectController {
 

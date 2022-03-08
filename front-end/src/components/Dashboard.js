@@ -1,8 +1,12 @@
 import React, {Component} from 'react';
 import ProjectItem from "./project/ProjectItem";
 import CreateProjectItemButton from "./project/CreateProjectItemButton";
+import {addProject, loadProjects} from "../store/project";
+import {connect} from "react-redux";
+
 
 class Dashboard extends Component {
+
     render() {
         return (
             <div className="projects">

@@ -1,11 +1,17 @@
 import React from 'react';
 import Form from "../common/Form";
-import ProTypes from 'prop-types'
 import {connect} from "react-redux";
-import {createProject} from "../../actions/projectActions";
+import {addProject, loadProjects} from "../../store/project";
 
 
 class AddProject extends Form {
+
+    handleSubmit = e => {
+        e.preventDefault();
+        console.log(this.state);
+        this.props.addProject(this.state.data);
+    }
+
     render() {
         return (
             <div>
@@ -34,4 +40,8 @@ class AddProject extends Form {
     }
 }
 
-export default AddProject;
+const mapDispatchToProps = (dispatch) => ({
+    addProject: project => dispatch(addProject(project))
+});
+
+export default connect(null, mapDispatchToProps)(AddProject);

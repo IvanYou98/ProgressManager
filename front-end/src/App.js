@@ -5,7 +5,9 @@ import NavBar from "./components/NavBar";
 import AddProject from "./components/project/AddProject";
 import Dashboard from "./components/Dashboard";
 import {Provider} from "react-redux";
-import store from "./store";
+import configureStore from "./store/configureStore";
+
+const store = configureStore();
 
 function App() {
     return (
