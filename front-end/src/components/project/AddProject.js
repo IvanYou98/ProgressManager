@@ -9,7 +9,7 @@ class AddProject extends Form {
     handleSubmit = e => {
         e.preventDefault();
         console.log(this.state);
-        this.props.addProject(this.state.data);
+        this.props.addProject(this.state.data, this.props.history);
     }
 
     render() {
@@ -41,7 +41,7 @@ class AddProject extends Form {
 }
 
 const mapDispatchToProps = (dispatch) => ({
-    addProject: project => dispatch(addProject(project))
+    addProject: (project, history) => dispatch(addProject(project, history))
 });
 
 export default connect(null, mapDispatchToProps)(AddProject);

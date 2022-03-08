@@ -23,8 +23,8 @@ const url = "/project"
 const {projectAdded, projectsLoaded} = slice.actions;
 export default slice.reducer;
 
-export const addProject = project => (dispatch, getState) => {
-    return dispatch(
+export const addProject = (project, history) => (dispatch, getState) => {
+    const result = dispatch(
         apiCallBegan({
             url,
             method: "post",
@@ -32,6 +32,8 @@ export const addProject = project => (dispatch, getState) => {
             onSuccess: projectAdded.type
         })
     )
+    history.push("/dashboard")
+    return result;
 }
 
 export const loadProjects = () => (dispatch, getState) => {
