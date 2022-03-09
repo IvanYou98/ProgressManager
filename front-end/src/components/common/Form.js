@@ -5,12 +5,20 @@ import Submit from "./Submit";
 
 class Form extends Component {
     state = {
-        data: {}
+        data: {},
+        errors: {}
     };
+
+    componentWillReceiveProps(nextProps, nextContext) {
+        if (nextProps.errors) {
+            this.setState({
+                errors: nextProps.errors
+            })
+        }
+    }
 
     handleSubmit = e => {
         e.preventDefault();
-        console.log(this.state);
     }
 
     handleChange = ({currentTarget: input}) => {
@@ -21,25 +29,31 @@ class Form extends Component {
     }
 
     renderInput(name, placeholder, type) {
-        const {data} = this.state;
+        const {data, errors} = this.state;
         return (
-            <Input type={type}
-                   placeholder={placeholder}
-                   name={name}
-                   value={data[name]}
-                   onChange={this.handleChange}
-            />
+            <React.Fragment>
+                <Input type={type}
+                       placeholder={placeholder}
+                       name={name}
+                       value={data[name]}
+                       onChange={this.handleChange}
+                />
+                <p className="text-danger">{errors[name]}</p>
+            </React.Fragment>
         )
     }
 
     renderTextArea(placeholder, name) {
-        const {data} = this.state;
+        const {data, errors} = this.state;
         return (
-            <TextArea placeholder={placeholder}
-                      name={name}
-                      value={data[name]}
-                      onChange={this.handleChange}
-            />
+            <React.Fragment>
+                <TextArea placeholder={placeholder}
+                          name={name}
+                          value={data[name]}
+                          onChange={this.handleChange}
+                />
+                <p className="text-danger">{errors[name]}</p>
+            </React.Fragment>
         )
     }
 

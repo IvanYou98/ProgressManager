@@ -2,7 +2,7 @@ import {createSlice} from "@reduxjs/toolkit";
 
 const slice = createSlice({
     name: "errors",
-    initialState: {},
+    initialState: {test: "error"},
     reducers: {
         getErrors: (state, action) => {
             return action.payload;

@@ -13,8 +13,9 @@ const slice = createSlice({
         },
         projectAdded: (projects, action) => {
             projects.list.push(
-                action.payload
-            )
+                action.payload.data
+            );
+            action.payload.history.push("/dashboard")
         }
     }
 })
@@ -27,12 +28,12 @@ export const addProject = (project, history) => (dispatch, getState) => {
     const result = dispatch(
         apiCallBegan({
             url,
+            history,
             method: "post",
             data: project,
             onSuccess: projectAdded.type
         })
     )
-    history.push("/dashboard")
     return result;
 }
 

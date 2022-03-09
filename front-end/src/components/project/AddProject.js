@@ -8,11 +8,12 @@ class AddProject extends Form {
 
     handleSubmit = e => {
         e.preventDefault();
-        console.log(this.state);
         this.props.addProject(this.state.data, this.props.history);
     }
 
+
     render() {
+        const {errors} = this.state;
         return (
             <div>
                 <div className="project">
@@ -40,8 +41,12 @@ class AddProject extends Form {
     }
 }
 
+const mapStateToProps = state => ({
+    errors: state.errors
+})
+
 const mapDispatchToProps = (dispatch) => ({
     addProject: (project, history) => dispatch(addProject(project, history))
 });
 
-export default connect(null, mapDispatchToProps)(AddProject);
+export default connect(mapStateToProps, mapDispatchToProps)(AddProject);
