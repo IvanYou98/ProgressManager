@@ -5,11 +5,11 @@ import reportWebVitals from './reportWebVitals';
 import App from "./App";
 
 ReactDOM.render(
-  <React.StrictMode>
+  <React.Fragment>
       <div className="App">
           <App/>
       </div>
-  </React.StrictMode>,
+  </React.Fragment>,
   document.getElementById('root')
 );
 

@@ -5,6 +5,16 @@ import {addProject, loadProjects} from "../../store/project";
 
 
 class AddProject extends Form {
+    state = {
+        data: {
+            projectName: "",
+            projectIdentifier: "",
+            description: "",
+            start_date: "",
+            end_date: ""
+        },
+        errors: {}
+    };
 
     handleSubmit = e => {
         e.preventDefault();

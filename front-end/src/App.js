@@ -15,8 +15,9 @@ function App() {
             <BrowserRouter>
                 <div>
                     <NavBar/>
-                    <Route path="/dashBoard" exact component={Dashboard}/>
-                    <Route path="/addProject" exact component={AddProject}/>
+                    {/*component={props => <HomePage {...props} />*/}
+                    <Route path="/dashBoard" exact component={props => <Dashboard {...props} />}/>
+                    <Route path="/addProject" exact component={props => <AddProject {...props} />}/>
                 </div>
             </BrowserRouter>
         </Provider>
