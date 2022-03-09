@@ -30,9 +30,11 @@ class Form extends Component {
 
     renderInput(name, placeholder, type) {
         const {data, errors} = this.state;
+        const className = "form-control form-control-lg" + (errors[name] && " is-invalid");
         return (
             <React.Fragment>
                 <Input type={type}
+                       className={className}
                        placeholder={placeholder}
                        name={name}
                        value={data[name]}
@@ -45,10 +47,12 @@ class Form extends Component {
 
     renderTextArea(placeholder, name) {
         const {data, errors} = this.state;
+        const className = "form-control form-control-lg" + (errors[name] && " is-invalid");
         return (
             <React.Fragment>
                 <TextArea placeholder={placeholder}
                           name={name}
+                          className={className}
                           value={data[name]}
                           onChange={this.handleChange}
                 />

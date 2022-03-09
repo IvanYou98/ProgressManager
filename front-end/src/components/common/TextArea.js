@@ -1,10 +1,10 @@
 import React from 'react';
 
-function TextArea({placeholder, name, value, onChange}) {
+function TextArea({placeholder, name, value, onChange, className}) {
     return (
         <div className="form-group">
             <textarea
-                className="form-control form-control-lg"
+                className={className}
                 placeholder={placeholder}
                 name={name}
                 value={value}

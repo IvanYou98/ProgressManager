@@ -1,11 +1,11 @@
 import React from 'react';
 
-function Input({type, placeholder, name, value, onChange}) {
+function Input({type, placeholder, name, value, onChange, className}) {
     return (
         <div className="form-group">
             <input
                 type={type}
-                className="form-control form-control-lg"
+                className={className}
                 placeholder={placeholder}
                 name={name}
                 value={value}
