@@ -12,6 +12,8 @@ import java.util.HashMap;
 public class ProjectIdExceptionHandler extends ResponseEntityExceptionHandler {
     @ExceptionHandler
     public ResponseEntity<?> handleProjectIdException(ProjectIdException ex) {
-        return new ResponseEntity<>(ex.getMessage(), HttpStatus.BAD_REQUEST);
+        HashMap<String, String> errorMap = new HashMap<>();
+        errorMap.put("projectIdentifier", ex.getMessage());
+        return new ResponseEntity<>(errorMap, HttpStatus.BAD_REQUEST);
     }
 }

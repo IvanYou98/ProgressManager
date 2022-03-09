@@ -21,11 +21,11 @@ const api = ({dispatch}) => next => async action => {
         dispatch({
             type: onSuccess,
             payload: {
-                data: response.data,
+                data: response.data
             }
         });
-        if (method === 'post'){
-            history.push("/dashboard")
+        if (method === 'post') {
+            history.push('/dashboard')
         }
     } catch (error) {
         dispatch({

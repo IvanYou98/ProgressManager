@@ -3,7 +3,7 @@ package edu.ivanyou.backend.model;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 import java.util.Date;
 
@@ -14,15 +14,15 @@ public class Project {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotNull(message = "Project name is required!")
+    @NotEmpty(message = "Project name is required!")
     private String projectName;
 
-    @NotNull(message = "Project Identifier is required!")
+    @NotEmpty(message = "Project Identifier is required!")
     @Size(min = 4, max = 5, message = "Please use 4 to 5 characters")
     @Column(updatable = false, unique = true)
     private String projectIdentifier;
 
-    @NotNull(message = "Project Description is required!")
+    @NotEmpty(message = "Project Description is required!")
     private String description;
 
     @JsonFormat(pattern = "yyyy-MM-dd")

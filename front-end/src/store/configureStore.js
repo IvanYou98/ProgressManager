@@ -6,7 +6,9 @@ const func = () => {
     return configureStore({
             reducer,
             middleware: [
-                ...getDefaultMiddleware(),
+                ...getDefaultMiddleware({
+                    serializableCheck: false
+                }),
                 api
             ]
         }

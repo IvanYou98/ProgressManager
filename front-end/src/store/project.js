@@ -9,13 +9,12 @@ const slice = createSlice({
     reducers: {
         // fetch projects into lists
         projectsLoaded: (projects, action) => {
-            projects.list = action.payload.data;
+            const {data} = action.payload;
+            projects.list = data;
         },
         projectAdded: (projects, action) => {
-            projects.list.push(
-                action.payload.data
-            );
-
+            const {data} = action.payload;
+            projects.list.push(data);
         }
     }
 })
