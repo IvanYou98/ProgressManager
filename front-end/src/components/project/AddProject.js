@@ -13,7 +13,6 @@ class AddProject extends Form {
 
 
     render() {
-        const {errors} = this.state;
         return (
             <div>
                 <div className="project">

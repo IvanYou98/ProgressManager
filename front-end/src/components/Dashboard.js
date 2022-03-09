@@ -1,11 +1,18 @@
 import React, {Component} from 'react';
 import ProjectItem from "./project/ProjectItem";
 import CreateProjectItemButton from "./project/CreateProjectItemButton";
-import {addProject, loadProjects} from "../store/project";
+import {loadProjects} from "../store/project";
 import {connect} from "react-redux";
 
 
 class Dashboard extends Component {
+    state = {
+        projects: {}
+    }
+
+    componentDidMount() {
+        this.props.loadProjects();
+    }
 
     render() {
         return (
@@ -27,4 +34,13 @@ class Dashboard extends Component {
     }
 }
 
-export default Dashboard;
+
+const mapStateToProps = state => ({
+    projects: state.projects.list
+})
+
+const mapDispatchToProps = (dispatch) => ({
+    loadProjects: () => dispatch(loadProjects())
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Dashboard);

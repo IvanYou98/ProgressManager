@@ -21,10 +21,12 @@ const api = ({dispatch}) => next => async action => {
         dispatch({
             type: onSuccess,
             payload: {
-                history,
                 data: response.data,
             }
         });
+        if (method === 'post'){
+            history.push("/dashboard")
+        }
     } catch (error) {
         dispatch({
             type: getErrors.type,

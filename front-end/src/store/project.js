@@ -9,13 +9,13 @@ const slice = createSlice({
     reducers: {
         // fetch projects into lists
         projectsLoaded: (projects, action) => {
-            projects.list = action.payload;
+            projects.list = action.payload.data;
         },
         projectAdded: (projects, action) => {
             projects.list.push(
                 action.payload.data
             );
-            action.payload.history.push("/dashboard")
+
         }
     }
 })
@@ -25,7 +25,8 @@ const {projectAdded, projectsLoaded} = slice.actions;
 export default slice.reducer;
 
 export const addProject = (project, history) => (dispatch, getState) => {
-    const result = dispatch(
+
+    return dispatch(
         apiCallBegan({
             url,
             history,
@@ -34,7 +35,6 @@ export const addProject = (project, history) => (dispatch, getState) => {
             onSuccess: projectAdded.type
         })
     )
-    return result;
 }
 
 export const loadProjects = () => (dispatch, getState) => {
