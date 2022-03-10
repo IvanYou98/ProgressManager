@@ -1,7 +1,7 @@
 import React from 'react';
 import Form from "../common/Form";
 import {connect} from "react-redux";
-import {updateProject, findProjectById} from "../../store/project";
+import {saveProject, findProjectById} from "../../store/project";
 
 
 class UpdateProject extends Form {
@@ -18,21 +18,28 @@ class UpdateProject extends Form {
 
     componentDidMount() {
         const projectId = this.props.match.params.id;
-        this.props.findProjectById(projectId);
+        this.props.findProjectById(projectId, this.props.history);
     }
 
     componentWillReceiveProps(nextProps, nextContext) {
-        const {project} = nextProps;
-        this.setState({
-            data: project
-        })
-        // console.log(project)
+        const {project, errors} = nextProps;
+        if (project) {
+            this.setState({
+                data: project
+            })
+        }
+        if (errors) {
+            this.setState({
+                errors
+            })
+        }
+
     }
 
 
     handleSubmit = e => {
         e.preventDefault();
-        this.props.updateProject(this.state.data, this.props.history);
+        this.props.saveProject(this.state.data, this.props.history);
     }
 
 
@@ -65,18 +72,14 @@ class UpdateProject extends Form {
 }
 
 const mapStateToProps = state => ({
-    errors: state.errors,
+    errors: state.errors.data,
     project: state.projects.selectedProject
 })
 
-// const mapDispatchToProps = (dispatch) => ({
-//     addProject: project => dispatch(updateProject(project)),
-//     findProjectById: projectId => dispatch(findProjectById(projectId)),
-// });
 
 export default connect(
     mapStateToProps,
     {
         findProjectById,
-        updateProject
+        saveProject
     })(UpdateProject);

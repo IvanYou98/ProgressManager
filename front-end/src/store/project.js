@@ -1,5 +1,6 @@
 import {createSlice} from "@reduxjs/toolkit";
-import {apiCallBegan} from "./middleware/api"
+import {getErrors} from "./errors";
+import axios from "axios";
 
 const slice = createSlice({
     name: "projects",
@@ -8,19 +9,9 @@ const slice = createSlice({
         selectedProject: {}
     },
     reducers: {
-        // fetch projects into lists
         projectsLoaded: (projects, action) => {
             const {data} = action.payload;
             projects.list = data;
-        },
-        projectAdded: (projects, action) => {
-            const {data} = action.payload;
-            projects.list.push(data);
-        },
-        projectUpdated: (projects, action) => {
-            // const {data} = action.payload;
-            // const idx = projects.list.findIndex(project => project.id === data.id);
-            // projects.list[idx] = data;
         },
         projectFound: (projects, action) => {
             const {data} = action.payload;
@@ -29,52 +20,57 @@ const slice = createSlice({
     }
 })
 
-const url = "/project"
-const {projectAdded, projectsLoaded, projectUpdated, projectFound} = slice.actions;
+export const {projectsLoaded, projectFound} = slice.actions;
 export default slice.reducer;
 
-export const addProject = (project, history) => (dispatch, getState) => {
+const baseURL = "http://localhost:8080/api/project"
 
-    return dispatch(
-        apiCallBegan({
-            url,
-            history,
-            method: "post",
-            data: project,
-            onSuccess: projectAdded.type
+export const saveProject = (project, history) => async dispatch => {
+    try {
+        await axios.post(baseURL, project);
+        history.push('/dashboard');
+        dispatch({
+            type: getErrors,
+            payload: {}
         })
-    )
+    } catch (err) {
+        dispatch({
+            type: getErrors,
+            payload: {
+                errors: err.response.data
+            }
+        })
+    }
 }
 
-export const loadProjects = () => (dispatch, getState) => {
-    return dispatch(
-        apiCallBegan({
-            url: url + "/all",
-            method: 'get',
-            onSuccess: projectsLoaded.type
-        })
-    )
-}
-
-export const updateProject = (project, history) => (dispatch, getState) => {
-    return dispatch(
-        apiCallBegan({
-            url,
-            history,
-            method: "post",
-            data: project,
-            onSuccess: projectUpdated.type
+export const loadProjects = () => async dispatch => {
+    try {
+        const res = await axios.get(baseURL + "/all");
+        dispatch({
+            type: projectsLoaded,
+            payload: {
+                data: res.data
+            }
         })
 
-    )
+    } catch (err) {
+        console.log(err);
+    }
 }
 
-export const findProjectById = projectId => (dispatch, getState) => {
-    return dispatch(
-        apiCallBegan({
-            url: url + "/" + projectId,
-            method: "get",
-            onSuccess: projectFound.type
+export const findProjectById = (projectId, history) => async dispatch => {
+    try {
+        const res = await axios.get(baseURL + "/" + projectId);
+        dispatch({
+            type: projectFound,
+            payload: {
+                data: res.data
+            }
         })
-    )
+    } catch (err) {
+        history.push("/dashboard")
+    }
 }
+
+
+

@@ -7,7 +7,7 @@ export const apiCallBegan = createAction("apiCallBegan");
 const api = ({dispatch}) => next => async action => {
     if (action.type !== apiCallBegan.type)
         return next(action);
-    const {url, method, data, onSuccess, onError, history} = action.payload;
+    const {url, method, data, onSuccess, redirect, history} = action.payload;
 
     // dispatch the original function, otherwise it will be swallowed
     next(action);
@@ -32,6 +32,9 @@ const api = ({dispatch}) => next => async action => {
             type: getErrors.type,
             payload: error.response.data
         })
+        if (redirect) {
+            history.push(redirect);
+        }
     }
 }
 

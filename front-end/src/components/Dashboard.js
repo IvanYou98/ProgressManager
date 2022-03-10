@@ -45,8 +45,5 @@ const mapStateToProps = state => ({
     projects: state.projects.list
 })
 
-const mapDispatchToProps = (dispatch) => ({
-    loadProjects: () => dispatch(loadProjects())
-});
 
-export default connect(mapStateToProps, mapDispatchToProps)(Dashboard);
+export default connect(mapStateToProps, {loadProjects})(Dashboard);

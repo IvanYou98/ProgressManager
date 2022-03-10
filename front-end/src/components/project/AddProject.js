@@ -1,7 +1,7 @@
 import React from 'react';
 import Form from "../common/Form";
 import {connect} from "react-redux";
-import {addProject, loadProjects} from "../../store/project";
+import {saveProject} from "../../store/project";
 
 
 class AddProject extends Form {
@@ -18,9 +18,8 @@ class AddProject extends Form {
 
     handleSubmit = e => {
         e.preventDefault();
-        this.props.addProject(this.state.data, this.props.history);
+        this.props.saveProject(this.state.data, this.props.history);
     }
-
 
     render() {
         return (
@@ -51,11 +50,7 @@ class AddProject extends Form {
 }
 
 const mapStateToProps = state => ({
-    errors: state.errors
+    errors: state.errors.data
 })
 
-const mapDispatchToProps = (dispatch) => ({
-    addProject: (project, history) => dispatch(addProject(project, history))
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(AddProject);
+export default connect(mapStateToProps, {saveProject})(AddProject);
