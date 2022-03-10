@@ -28,15 +28,16 @@ class Form extends Component {
         this.setState({data});
     }
 
-    renderInput(name, placeholder, type) {
+    renderInput(name, placeholder, type, readOnly) {
         const {data, errors} = this.state;
-        const className = "form-control form-control-lg" + (errors[name] && " is-invalid");
+        const className = " form-control form-control-lg" + (errors[name] && " is-invalid");
         return (
             <React.Fragment>
                 <Input type={type}
                        className={className}
                        placeholder={placeholder}
                        name={name}
+                       readOnly={readOnly}
                        value={data[name]}
                        onChange={this.handleChange}
                 />

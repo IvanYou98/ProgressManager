@@ -6,6 +6,7 @@ import AddProject from "./components/project/AddProject";
 import Dashboard from "./components/Dashboard";
 import {Provider} from "react-redux";
 import configureStore from "./store/configureStore";
+import UpdateProject from "./components/project/UpdateProject";
 
 const store = configureStore();
 
@@ -18,6 +19,7 @@ function App() {
                     {/*component={props => <HomePage {...props} />*/}
                     <Route path="/dashBoard" exact component={props => <Dashboard {...props} />}/>
                     <Route path="/addProject" exact component={props => <AddProject {...props} />}/>
+                    <Route path="/updateProject/:id" exact component={props => <UpdateProject {...props} />}/>
                 </div>
             </BrowserRouter>
         </Provider>
