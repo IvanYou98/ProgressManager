@@ -16,11 +16,15 @@ const slice = createSlice({
         projectFound: (projects, action) => {
             const {data} = action.payload;
             projects.selectedProject = data;
+        },
+        projectDeleted: (projects, action) => {
+            const {projectId} = action.payload;
+            projects.list =  projects.list.filter(project => project.projectIdentifier !== projectId);
         }
     }
 })
 
-export const {projectsLoaded, projectFound} = slice.actions;
+export const {projectsLoaded, projectFound, projectDeleted} = slice.actions;
 export default slice.reducer;
 
 const baseURL = "http://localhost:8080/api/project"
@@ -67,6 +71,22 @@ export const findProjectById = (projectId, history) => async dispatch => {
                 data: res.data
             }
         })
+    } catch (err) {
+        history.push("/dashboard")
+    }
+}
+
+export const deleteProjectById = (projectId, history) => async dispatch => {
+    try {
+        console.log("In the reducer")
+        const res = await axios.delete(baseURL + "/" + projectId);
+        dispatch({
+            type: projectDeleted,
+            payload: {
+                projectId
+            }
+        })
+        history.push("/dashboard")
     } catch (err) {
         history.push("/dashboard")
     }
