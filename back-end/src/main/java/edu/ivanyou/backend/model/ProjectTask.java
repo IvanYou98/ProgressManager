@@ -11,6 +11,8 @@ public class ProjectTask {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    // we want our project sequence to be: PROJ1-1 PROJ1-2, PROJ1-3 (which means the first, second, third task of project1)
     @Column(updatable = false)
     private String projectSequence;
     @NotBlank(message = "Please include a project summary")
