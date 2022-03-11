@@ -78,17 +78,16 @@ export const findProjectById = (projectId, history) => async dispatch => {
 
 export const deleteProjectById = (projectId, history) => async dispatch => {
     try {
-        console.log("In the reducer")
-        const res = await axios.delete(baseURL + "/" + projectId);
+        if (!window.confirm("Are you sure you want to delete this project?")) return;
+        await axios.delete(baseURL + "/" + projectId);
         dispatch({
             type: projectDeleted,
             payload: {
                 projectId
             }
         })
-        history.push("/dashboard")
     } catch (err) {
-        history.push("/dashboard")
+        console.log(err);
     }
 }
 

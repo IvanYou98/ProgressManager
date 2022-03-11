@@ -7,8 +7,7 @@ import {deleteProjectById} from "../../store/project";
 class ProjectItem extends Component {
 
     handleProjectDelete = projectId => {
-        console.log("click delete! " + projectId)
-        this.props.deleteProjectById(projectId, this.props.history)
+        this.props.deleteProjectById(projectId)
     }
 
     render() {
