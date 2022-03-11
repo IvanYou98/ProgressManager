@@ -1,22 +1,40 @@
 package edu.ivanyou.backend.services;
 
 import edu.ivanyou.backend.exception.ProjectIdException;
+import edu.ivanyou.backend.model.Backlog;
 import edu.ivanyou.backend.model.Project;
+import edu.ivanyou.backend.repositories.BacklogRepository;
 import edu.ivanyou.backend.repositories.ProjectRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestBody;
 
-import javax.validation.Valid;
 import java.util.List;
-import java.util.Optional;
+
 
 @Service
 public class ProjectService {
     @Autowired
     private ProjectRepository projectRepository;
 
+    @Autowired
+    private BacklogRepository backlogRepository;
+
     public Project saveOrUpdateProject(Project project) {
+        // if we create a new project, then we also create a new backlog
+        if (project.getId() == null) {
+            Backlog backlog = new Backlog();
+            // one to one binding
+            project.setBacklog(backlog);
+            backlog.setProject(project);
+            backlog.setProjectIdentifier(project.getProjectIdentifier());
+        }
+
+        // If we are updating an existing project, we don't want to change the backlog
+        if (project.getId() != null) {
+            Backlog backlog = backlogRepository.findByProjectIdentifier(project.getProjectIdentifier());
+            project.setBacklog(backlog);
+        }
+
         return projectRepository.save(project);
     }
 

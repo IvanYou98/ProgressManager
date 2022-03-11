@@ -8,6 +8,7 @@ import javax.validation.constraints.Size;
 import java.util.Date;
 
 @Entity
+// Each project can only have one backlog and one backlog can only belong to one project
 public class Project {
 
     @Id
@@ -37,6 +38,14 @@ public class Project {
 
     @JsonFormat(pattern = "yyyy-MM-dd")
     private Date updated_At;
+
+    // one to one relationship with backlog
+    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "project")
+    private Backlog backlog;
+
+    public Backlog getBacklog() {
+        return backlog;
+    }
 
     public Project() {
     }
@@ -103,6 +112,10 @@ public class Project {
 
     public void setUpdated_At(Date updated_At) {
         this.updated_At = updated_At;
+    }
+
+    public void setBacklog(Backlog backlog) {
+        this.backlog = backlog;
     }
 
     @PrePersist
