@@ -21,6 +21,8 @@ public class ProjectService {
 
     public Project saveOrUpdateProject(Project project) {
         // if we create a new project, then we also create a new backlog
+        System.out.println("Saving an object into database!!!");
+        System.out.println(project);
         if (project.getId() == null) {
             Backlog backlog = new Backlog();
             // one to one binding

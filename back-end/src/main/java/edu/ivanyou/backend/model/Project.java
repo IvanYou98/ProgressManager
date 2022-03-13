@@ -1,6 +1,7 @@
 package edu.ivanyou.backend.model;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
@@ -41,6 +42,7 @@ public class Project {
 
     // one to one relationship with backlog
     @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "project")
+    @JsonIgnore
     private Backlog backlog;
 
     public Backlog getBacklog() {
@@ -126,5 +128,20 @@ public class Project {
     @PreUpdate
     protected void onUpdate() {
         this.updated_At = new Date();
+    }
+
+    @Override
+    public String toString() {
+        return "Project{" +
+                "id=" + id +
+                ", projectName='" + projectName + '\'' +
+                ", projectIdentifier='" + projectIdentifier + '\'' +
+                ", description='" + description + '\'' +
+                ", start_date=" + start_date +
+                ", end_date=" + end_date +
+                ", created_At=" + created_At +
+                ", updated_At=" + updated_At +
+                ", backlog=" + backlog +
+                '}';
     }
 }

@@ -7,6 +7,8 @@ import edu.ivanyou.backend.repositories.ProjectTaskRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class ProjectTaskService {
     @Autowired
@@ -24,6 +26,7 @@ public class ProjectTaskService {
         //  (which means the first, second, third task of project1)
         Integer backlogSequence = backlog.getPTSequence();
         backlogSequence++;
+        backlog.setPTSequence(backlogSequence);
         projectTask.setProjectSequence(projectIdentifier + "-" + backlogSequence);
         projectTask.setProjectIdentifier(projectIdentifier);
 
@@ -37,6 +40,10 @@ public class ProjectTaskService {
         }
 
         return projectTaskRepository.save(projectTask);
+    }
 
+
+    public List<ProjectTask> findByProjectIdentifier(String project_id) {
+        return projectTaskRepository.findByProjectIdentifierOrderByPriority(project_id);
     }
 }

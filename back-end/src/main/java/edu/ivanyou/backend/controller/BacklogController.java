@@ -11,6 +11,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.List;
 
 
 @Controller
@@ -32,5 +33,10 @@ public class BacklogController {
 
         ProjectTask projectTask1 = projectTaskService.addProjectTask(project_id, projectTask);
         return new ResponseEntity<>(projectTask1, HttpStatus.CREATED);
+    }
+
+    @GetMapping("/{project_id}")
+    public ResponseEntity<List<ProjectTask>> getProjectTasksByProjectId (@PathVariable String project_id) {
+        return new ResponseEntity<>(projectTaskService.findByProjectIdentifier(project_id), HttpStatus.OK);
     }
 }
