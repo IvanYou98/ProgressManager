@@ -68,6 +68,27 @@ class Form extends Component {
         )
     }
 
+    renderSelector(options, name, values) {
+        const {data, errors} = this.state;
+        const className = "form-control form-control-lg" + (errors[name] && " is-invalid");
+        return (
+            <React.Fragment>
+                <div className="form-group">
+                    <select
+                        name={name}
+                        className={className}
+                        value={data[name]}
+                        onChange={this.handleChange}>
+                        {options.map((item, index) => {
+                            return <option value={values ? values[index] : index} key={index}>{item}</option>
+                        })}
+                    </select>
+                </div>
+            </React.Fragment>
+        )
+
+    }
+
 }
 
 export default Form;

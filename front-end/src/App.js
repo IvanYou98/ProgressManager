@@ -7,6 +7,8 @@ import Dashboard from "./components/Dashboard";
 import {Provider} from "react-redux";
 import configureStore from "./store/configureStore";
 import UpdateProject from "./components/project/UpdateProject";
+import ProjectBoard from "./components/ProjectBoard/ProjectBoard";
+import AddProjectTask from "./components/ProjectBoard/ProjectTasks/AddProjectTask";
 
 const store = configureStore();
 
@@ -20,6 +22,8 @@ function App() {
                     <Route path="/addProject" exact component={props => <AddProject {...props} />}/>
                     <Route path="/updateProject/:id" exact component={props => <UpdateProject {...props} />}/>
                     <Route path="/deleteProject/:id" exact component={props => <Dashboard {...props} />}/>
+                    <Route path="/projectBoard/:id" exact component={props => <ProjectBoard {...props} />} />
+                    <Route path="/addProjectTask/:id" exact component={props => <AddProjectTask {...props} />} />
                 </div>
             </BrowserRouter>
         </Provider>
