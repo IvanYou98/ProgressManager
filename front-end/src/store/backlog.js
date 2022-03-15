@@ -50,3 +50,18 @@ export const saveTask = (projectId, task, history) => async dispatch => {
     }
 }
 
+
+export const loadTasks = (projectId) => async dispatch => {
+    try {
+        const res = await axios.get(baseURL + "/" + projectId);
+        dispatch({
+            type: tasksLoaded,
+            payload: {
+                data: res.data
+            }
+        })
+
+    } catch (err) {
+        console.log(err);
+    }
+}
