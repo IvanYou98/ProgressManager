@@ -2,6 +2,7 @@ import React from 'react';
 import Form from "../../common/Form";
 import {connect} from "react-redux";
 import {saveTask} from "../../../store/backlog";
+import {Link} from "react-router-dom";
 
 class AddProjectTask extends Form {
     state = {
@@ -9,7 +10,7 @@ class AddProjectTask extends Form {
             summary: "",
             acceptanceCriteria: "",
             dueDate: "",
-            priority: "",
+            priority: 0,
             status: ""
         },
         errors: {}
@@ -27,9 +28,9 @@ class AddProjectTask extends Form {
                 <div className="container">
                     <div className="row">
                         <div className="col-md-8 m-auto">
-                            <a href="#" className="btn btn-light">
+                            <Link to={`/projectBoard/${this.props.match.params.id}`} className="btn btn-light">
                                 Back to Project Board
-                            </a>
+                            </Link>
                             <h4 className="display-4 text-center">Add /Update Project Task</h4>
                             {/*<p className="lead text-center">Project Name + Project Code</p>*/}
 
@@ -57,6 +58,7 @@ class AddProjectTask extends Form {
 const mapStateToProps = state => ({
     errors: state.errors.data
 })
+
 
 export default connect(mapStateToProps, {saveTask})(AddProjectTask)
 

@@ -36,6 +36,10 @@ export const saveTask = (projectId, task, history) => async dispatch => {
     try {
         await axios.post(baseURL + "/" + projectId, task);
         history.push(`/projectBoard/${projectId}`);
+        dispatch({
+            type: getErrors,
+            payload: {}
+        })
     } catch (err) {
         dispatch({
             type: getErrors,
