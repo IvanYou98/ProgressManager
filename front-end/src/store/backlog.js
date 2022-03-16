@@ -62,6 +62,12 @@ export const loadTasks = (projectId) => async dispatch => {
         })
 
     } catch (err) {
-        console.log(err);
+        console.log(err.response);
+        dispatch({
+            type: getErrors,
+            payload: {
+                errors: err.response.data
+            }
+        })
     }
 }

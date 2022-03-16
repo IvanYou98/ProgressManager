@@ -49,12 +49,17 @@ public class ProjectTaskService {
 
 
     public List<ProjectTask> findByProjectIdentifier(String project_id) {
+        Backlog backlog = backlogRepository.findByProjectIdentifier(project_id);
+        if (backlog == null) {
+            throw new ProjectIdException("Project id: " + project_id + " does not exist!");
+        }
         return projectTaskRepository.findByProjectIdentifierOrderByPriority(project_id);
     }
 
     public ProjectTask getProjectTask(String projectIdentifier, String projectSequence) {
         // 1. make sure that we're searching on an existing backlog(project)
         Backlog backlog = backlogRepository.findByProjectIdentifier(projectIdentifier);
+
         if (backlog == null) {
             throw new ProjectIdException("Project id: " + projectIdentifier + " not found");
         }
