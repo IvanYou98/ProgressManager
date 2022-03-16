@@ -62,7 +62,6 @@ export const loadTasks = (projectId) => async dispatch => {
         })
 
     } catch (err) {
-        console.log(err.response);
         dispatch({
             type: getErrors,
             payload: {
@@ -71,3 +70,23 @@ export const loadTasks = (projectId) => async dispatch => {
         })
     }
 }
+
+export const findTaskById = (projectId, projectSequence)  => async dispatch => {
+    try {
+        const res = await axios.get(baseURL + "/" + projectId + "/" + projectSequence);
+        dispatch({
+            type: taskFound,
+            payload: {
+                data: res.data
+            }
+        })
+    } catch (err) {
+        dispatch({
+            type: getErrors,
+            payload: {
+                errors: err.response.data
+            }
+        })
+    }
+}
+

@@ -9,7 +9,6 @@ class ProjectBoard extends Component {
 
     componentDidMount() {
         this.props.loadTasks(this.projectId);
-        console.log(this.props.errors);
     }
 
 

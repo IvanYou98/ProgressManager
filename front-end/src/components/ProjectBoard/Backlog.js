@@ -14,7 +14,7 @@ class Backlog extends Component {
                                 <h3>TO DO</h3>
                             </div>
                         </div>
-                        {tasks.map(task => task.status === "TO_DO" ? <ProjectTaskItem task={task} /> : null)}
+                        {tasks.map(task => task.status === "TO_DO" ? <ProjectTaskItem task={task} key={task.projectSequence}/> : null)}
 
                     </div>
                     <div className="col-md-4">
@@ -23,7 +23,7 @@ class Backlog extends Component {
                                 <h3>In Progress</h3>
                             </div>
                         </div>
-                        {tasks.map(task => task.status === "IN_PROGRESS" ? <ProjectTaskItem task={task} /> : null)}
+                        {tasks.map(task => task.status === "IN_PROGRESS" ? <ProjectTaskItem task={task} key={task.projectSequence}/> : null)}
                     </div>
                     <div className="col-md-4">
                         <div className="card text-center mb-2">
@@ -31,7 +31,7 @@ class Backlog extends Component {
                                 <h3>Done</h3>
                             </div>
                         </div>
-                        {tasks.map(task => task.status === "DONE" ? <ProjectTaskItem task={task} /> : null)}
+                        {tasks.map(task => task.status === "DONE" ? <ProjectTaskItem task={task} key={task.projectSequence} /> : null)}
                     </div>
                 </div>
             </div>

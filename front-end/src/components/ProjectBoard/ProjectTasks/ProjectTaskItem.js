@@ -1,6 +1,12 @@
 import React, {Component} from 'react';
+import {Link} from "react-router-dom";
 
 class ProjectTaskItem extends Component {
+
+    componentDidMount() {
+        // const taskId = this.props.match.params.id;
+        // this.props.find
+    }
 
     render() {
         const {task} = this.props;
@@ -31,9 +37,8 @@ class ProjectTaskItem extends Component {
                     <p className="card-text text-truncate ">
                         {task.acceptanceCriteria}
                     </p>
-                    <a href="/" className="btn btn-primary">
-                        View / Update</a>
-
+                    <Link to={"/updateProjectTask/" + task.projectIdentifier + "/" + task.projectSequence} className="btn btn-primary">
+                        View / Update</Link>
                     <button className="btn btn-danger ml-4">
                         Delete
                     </button>

@@ -9,6 +9,7 @@ import configureStore from "./store/configureStore";
 import UpdateProject from "./components/project/UpdateProject";
 import ProjectBoard from "./components/ProjectBoard/ProjectBoard";
 import AddProjectTask from "./components/ProjectBoard/ProjectTasks/AddProjectTask";
+import UpdateProjectTask from "./components/ProjectBoard/ProjectTasks/UpdateProjectTask";
 
 const store = configureStore();
 
@@ -24,6 +25,7 @@ function App() {
                     <Route path="/deleteProject/:id" exact component={props => <Dashboard {...props} />}/>
                     <Route path="/projectBoard/:id" exact component={props => <ProjectBoard {...props} />} />
                     <Route path="/addProjectTask/:id" exact component={props => <AddProjectTask {...props} />} />
+                    <Route path="/updateProjectTask/:projectId/:projectSequence" exact component={props => <UpdateProjectTask {...props} />} />
                 </div>
             </BrowserRouter>
         </Provider>
