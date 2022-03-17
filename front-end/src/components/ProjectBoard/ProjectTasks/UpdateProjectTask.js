@@ -5,16 +5,21 @@ import {saveTask, findTaskById} from "../../../store/backlog";
 import {Link} from "react-router-dom";
 
 class UpdateProjectTask extends Form {
-    state = {
-        data: {
-            summary: "",
-            acceptanceCriteria: "",
-            dueDate: "",
-            priority: 0,
-            status: ""
-        },
-        errors: {}
+    constructor(props) {
+        super(props);
+        this.state = {
+            data: {
+                projectSequence: "",
+                summary: "",
+                acceptanceCriteria: "",
+                dueDate: "",
+                priority: 0,
+                status: ""
+            },
+            errors: {}
+        }
     }
+
 
     componentDidMount() {
         const {projectId, projectSequence} = this.props.match.params;
@@ -24,6 +29,7 @@ class UpdateProjectTask extends Form {
     componentWillReceiveProps(nextProps, nextContext) {
         const {task, errors} = nextProps;
         if (task) {
+
             this.setState({
                 data: task
             })
@@ -47,12 +53,13 @@ class UpdateProjectTask extends Form {
                 <div className="container">
                     <div className="row">
                         <div className="col-md-8 m-auto">
-                            <Link to={`/projectBoard/${this.props.match.params.id}`} className="btn btn-light">
+                            <Link to={`/projectBoard/${this.state.projectId}`} className="btn btn-light">
                                 Back to Project Board
                             </Link>
                             <h4 className="display-4 text-center">Update Project Task</h4>
 
                             <form onSubmit={this.handleSubmit}>
+                                {this.renderInput("projectSequence", "", "text", true)}
                                 {this.renderInput("summary", "Place Task Summary", "text")}
                                 {this.renderTextArea("Acceptance Criteria", "acceptanceCriteria")}
                                 <h6>Due Date</h6>

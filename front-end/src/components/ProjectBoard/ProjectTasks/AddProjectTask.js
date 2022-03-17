@@ -31,7 +31,7 @@ class AddProjectTask extends Form {
                             <Link to={`/projectBoard/${this.props.match.params.id}`} className="btn btn-light">
                                 Back to Project Board
                             </Link>
-                            <h4 className="display-4 text-center">Add /Update Project Task</h4>
+                            <h4 className="display-4 text-center">Add Project Task</h4>
                             {/*<p className="lead text-center">Project Name + Project Code</p>*/}
 
                             <form onSubmit={this.handleSubmit}>
