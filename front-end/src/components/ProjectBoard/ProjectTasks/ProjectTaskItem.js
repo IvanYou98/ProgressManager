@@ -1,12 +1,15 @@
 import React, {Component} from 'react';
 import {Link} from "react-router-dom";
+import {connect} from "react-redux";
+import {deleteTaskById} from "../../../store/backlog";
 
 class ProjectTaskItem extends Component {
 
-    componentDidMount() {
-        // const taskId = this.props.match.params.id;
-        // this.props.find
+    handleTaskDelete = (projectIdentifier, projectSequence) => {
+        this.props.deleteTaskById(projectIdentifier, projectSequence);
     }
+
+
 
     render() {
         const {task} = this.props;
@@ -39,7 +42,9 @@ class ProjectTaskItem extends Component {
                     </p>
                     <Link to={"/updateProjectTask/" + task.projectIdentifier + "/" + task.projectSequence} className="btn btn-primary">
                         View / Update</Link>
-                    <button className="btn btn-danger ml-4">
+                    <button
+                        className="btn btn-danger ml-4"
+                        onClick= {() => this.handleTaskDelete(task.projectIdentifier, task.projectSequence) }>
                         Delete
                     </button>
                 </div>
@@ -49,4 +54,5 @@ class ProjectTaskItem extends Component {
 }
 
 
-export default ProjectTaskItem;
+
+export default connect(null, {deleteTaskById})(ProjectTaskItem);

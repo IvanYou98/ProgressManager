@@ -90,3 +90,25 @@ export const findTaskById = (projectId, projectSequence)  => async dispatch => {
     }
 }
 
+export const deleteTaskById = (projectId, projectSequence)  => async dispatch => {
+    try {
+        await axios.delete(baseURL + "/" + projectId + "/" + projectSequence);
+        dispatch({
+            type: taskDeleted,
+            payload: {
+                projectSequence
+            }
+        })
+    } catch (err) {
+        dispatch({
+            type: getErrors,
+            payload: {
+                errors: err.response.data
+            }
+        })
+    }
+}
+
+
+
+
