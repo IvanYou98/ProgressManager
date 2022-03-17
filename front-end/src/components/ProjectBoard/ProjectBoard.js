@@ -8,7 +8,6 @@ class ProjectBoard extends Component {
 
 
     componentDidMount() {
-        console.log("LOAD_TASK")
         this.props.loadTasks(this.props.match.params.id);
     }
 

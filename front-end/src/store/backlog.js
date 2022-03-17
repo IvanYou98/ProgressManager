@@ -30,7 +30,7 @@ export const {tasksLoaded, taskFound, taskDeleted} = slice.actions;
 export default slice.reducer;
 
 
-const baseURL = "http://localhost:8080/api/backlog"
+const baseURL = "/api/backlog"
 
 export const saveTask = (projectId, task, history) => async dispatch => {
     try {

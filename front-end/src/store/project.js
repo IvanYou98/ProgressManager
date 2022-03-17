@@ -27,7 +27,7 @@ const slice = createSlice({
 export const {projectsLoaded, projectFound, projectDeleted} = slice.actions;
 export default slice.reducer;
 
-const baseURL = "http://localhost:8080/api/project"
+const baseURL = "/api/project"
 
 export const saveProject = (project, history) => async dispatch => {
     try {
